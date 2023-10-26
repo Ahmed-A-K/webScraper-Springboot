@@ -6,6 +6,6 @@ import java.io.IOException;
 import java.util.Set;
 
 public interface IScrapperService {
-    Set<ResponseDTO> getVehicelByModel(String model) throws IOException;
+    Set<ResponseDTO> getVehicleByModel() throws IOException;
 
 }
