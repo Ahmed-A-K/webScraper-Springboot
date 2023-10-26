@@ -2,7 +2,6 @@ package com.ahmed.webScraper.service.impl;
 
 import com.ahmed.webScraper.DTO.ResponseDTO;
 import com.ahmed.webScraper.service.IScrapperService;
-import io.micrometer.common.util.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
