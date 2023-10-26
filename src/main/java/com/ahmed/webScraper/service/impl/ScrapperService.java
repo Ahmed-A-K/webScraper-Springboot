@@ -22,7 +22,6 @@ public class ScrapperService implements IScrapperService {
 
     @Override
     public Set<ResponseDTO> getVehicleByModel() throws IOException {
-        System.out.println(url);
         Set<ResponseDTO> responseDTOS = new HashSet<>();
         extractDataFromTarget(responseDTOS,url);
         return responseDTOS;
