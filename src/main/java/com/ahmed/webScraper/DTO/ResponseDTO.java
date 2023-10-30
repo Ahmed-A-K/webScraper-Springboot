@@ -4,6 +4,9 @@ import lombok.Data;
 
 @Data
 public class ResponseDTO {
-    String title;
+    String capital;
+    String country;
+    String population;
+    String area;
     String url;
 }

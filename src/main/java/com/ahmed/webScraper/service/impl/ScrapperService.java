@@ -30,11 +30,14 @@ public class ScrapperService implements IScrapperService {
 
         Document document = Jsoup.connect(url).userAgent("Mozilla/5.0").get();
 
-        Elements elements = document.getElementsByTag("h3");
+        Elements elements = document.getElementsByClass("col-md-4 country");
 
         for (Element ads: elements) {
             ResponseDTO responseDTO = new ResponseDTO();
-                responseDTO.setTitle(ads.text());
+                responseDTO.setCapital(ads.select(".country-name").text());
+                responseDTO.setCountry(ads.select(".country-capital").text());
+                responseDTO.setPopulation(ads.select(".country-population").text());
+                responseDTO.setArea(ads.select(".country-area").text() + " km2");
                 responseDTO.setUrl(url);
             if (responseDTO.getUrl() != null) responseDTOS.add(responseDTO);
         }
