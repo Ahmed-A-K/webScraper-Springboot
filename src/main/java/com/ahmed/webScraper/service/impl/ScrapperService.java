@@ -1,7 +1,10 @@
 package com.ahmed.webScraper.service.impl;
 
 import com.ahmed.webScraper.DTO.ResponseDTO;
+import com.ahmed.webScraper.entity.Scraped;
+import com.ahmed.webScraper.repository.ScrapperRepository;
 import com.ahmed.webScraper.service.IScrapperService;
+import lombok.RequiredArgsConstructor;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -14,7 +17,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Service
+@RequiredArgsConstructor
 public class ScrapperService implements IScrapperService {
+
+    private final ScrapperRepository repository;
 
     @Value("${website.url}")
     private String url;
@@ -39,6 +45,16 @@ public class ScrapperService implements IScrapperService {
                 responseDTO.setPopulation(ads.select(".country-population").text());
                 responseDTO.setArea(ads.select(".country-area").text() + " km2");
                 responseDTO.setUrl(url);
+
+            Scraped scraped = Scraped.builder()
+                            .country(responseDTO.getCountry())
+                            .capital(responseDTO.getCapital())
+                            .population(responseDTO.getPopulation())
+                            .area(responseDTO.getArea())
+                            .url(responseDTO.getUrl())
+                            .build();
+            repository.save(scraped);
+
             if (responseDTO.getUrl() != null) responseDTOS.add(responseDTO);
         }
     }
